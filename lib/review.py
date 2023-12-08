@@ -47,6 +47,15 @@ class Review:
         """ Insert a new row with the year, summary, and employee id values of the current Review object.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
+        sql = """
+            INSERT INTO reviews (year, summary, employee_id)
+            VALUES (?, ?, ?)
+        """
+        CURSOR.execute(sql, (self.year, self.summary, self.employee_id))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
         pass
 
     @classmethod
