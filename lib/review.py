@@ -61,7 +61,9 @@ class Review:
     @classmethod
     def create(cls, year, summary, employee_id):
         """ Initialize a new Review instance and save the object to the database. Return the new instance. """
-        pass
+        review = cls(year, summary, employee_id)
+        review.save()
+        return review
    
     @classmethod
     def instance_from_db(cls, row):
@@ -69,7 +71,6 @@ class Review:
         # Check the dictionary for  existing instance using the row's primary key
         pass
    
-
     @classmethod
     def find_by_id(cls, id):
         """Return a Review instance having the attribute values from the table row."""
