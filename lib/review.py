@@ -68,7 +68,6 @@ class Review:
     @classmethod
     def instance_from_db(cls, row):
         """Return an Review instance having the attribute values from the table row."""
-        print('here')
         # Check the dictionary for existing instance using the row's primary key
         review = cls.all.get(row[0])
         if review:
@@ -96,6 +95,13 @@ class Review:
 
     def update(self):
         """Update the table row corresponding to the current Review instance."""
+        sql = """
+            UPDATE reviews
+            SET year = ?, summary = ?, employee_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.year, self.summary, self.employee_id, self.id))
+        CONN.commit()
         pass
 
     def delete(self):
