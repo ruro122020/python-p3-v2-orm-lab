@@ -41,6 +41,17 @@ class Review:
             self._summary = summary
         else:
             raise ValueError
+        
+    @property
+    def employee_id(self):
+        return self._employee_id
+    
+    @employee_id.setter
+    def employee_id(self, employee_id):
+        if type(employee_id) is int and Employee.find_by_id(employee_id):
+            self._employee_id = employee_id
+        else:
+            raise ValueError
 
     @classmethod
     def create_table(cls):
