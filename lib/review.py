@@ -71,7 +71,6 @@ class Review:
         print('here')
         # Check the dictionary for existing instance using the row's primary key
         review = cls.all.get(row[0])
-        print('review obj', review)
         if review:
             review.year = row[1]
             review.summary = row[2]
@@ -87,7 +86,13 @@ class Review:
     @classmethod
     def find_by_id(cls, id):
         """Return a Review instance having the attribute values from the table row."""
-        pass
+        sql = """
+            SELECT * FROM reviews
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
 
     def update(self):
         """Update the table row corresponding to the current Review instance."""
