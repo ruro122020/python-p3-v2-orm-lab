@@ -19,6 +19,17 @@ class Review:
             f"<Review {self.id}: {self.year}, {self.summary}, "
             + f"Employee: {self.employee_id}>"
         )
+    
+    @property
+    def year(self):
+        return self._year
+    
+    @year.setter
+    def year(self, year):
+        if isinstance(year, int) and year >= 2000:
+            self._year = year
+        else:
+            raise ValueError
 
     @classmethod
     def create_table(cls):
