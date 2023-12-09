@@ -30,6 +30,17 @@ class Review:
             self._year = year
         else:
             raise ValueError
+        
+    @property
+    def summary(self):
+        return self._summary
+
+    @summary.setter
+    def summary(self, summary):
+        if isinstance(summary, str) and len(summary):
+            self._summary = summary
+        else:
+            raise ValueError
 
     @classmethod
     def create_table(cls):
